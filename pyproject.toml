@@ -1,7 +1,7 @@
 [project]
 name = "kai-tts"
 version = "0.1.0"
-description = "Add your description here"
+description = "Text-to-speech module for K.ai system (part of Kaspar 2028)"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []

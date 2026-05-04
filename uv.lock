@@ -41,7 +41,7 @@ version = "0.1.0"
 source = { virtual = "." }
 
 [package.dev-dependencies]
-dev = [
+universal = [
     { name = "numpy" },
     { name = "sounddevice" },
 ]
@@ -49,11 +49,11 @@ dev = [
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [
+linux = []
+universal = [
     { name = "numpy", specifier = ">=2.4.4" },
     { name = "sounddevice", specifier = ">=0.5.5" },
 ]
-server = []
 
 [[package]]
 name = "numpy"

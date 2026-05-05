@@ -1,10 +1,11 @@
 import socket
 from voxcpm import VoxCPM
+from pathlib import Path
 
 HOST = "127.0.0.1"
 PORT = 5005
 
-ref = "../resources/source-philip.wav"
+ref = Path(__file__).resolve().parent.parent / "resources" / "source-philip.wav"
 
 ref_text_philip = "Ich muss mal ausprobieren wie meine Stimme jetzt durch dieses System klingt weil das habe ich nämlich actually noch gar nicht gemacht und das sind ja jetzt doch ein paar Neuerungen dazu gekommen insofern hat es ja vielleicht 'nen überraschenden Effekt."
 ref_text_rt = "Wir wohnten der Generalprobe unserer eigenen Beerdigung bei - Unglücklicherweise erlebt dieses Abenteuer das allen gemeinsam ist jeder allein."
@@ -39,7 +40,7 @@ def main():
             while True:
                 try:
                     user_input = input("\nInput: ")
-                except (KeyboardInterrupt, EOFError):
+                except KeyboardInterrupt, EOFError:
                     break
 
                 if user_input.strip().lower() == "exit":

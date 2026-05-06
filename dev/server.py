@@ -23,7 +23,6 @@ def main():
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        # Disable Nagle's algorithm for immediate transmission
         s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.bind((HOST, PORT))
         s.listen()
@@ -31,7 +30,6 @@ def main():
 
         conn, addr = s.accept()
         with conn:
-            # Disable Nagle's on the specific connection socket as well
             conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             print(f"Client connected from {addr}")
 

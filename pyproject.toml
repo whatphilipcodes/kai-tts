@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "numpy>=2.4.4",
+    "pydantic>=2.13.3",
+    "pydantic-settings>=2.14.2",
+    "pyzmq>=27.1.0",
     "sounddevice>=0.5.5",
     "voxcpm>=2.0.2 ; sys_platform == 'linux'",
 ]

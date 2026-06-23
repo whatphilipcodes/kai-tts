@@ -2,14 +2,11 @@ import time
 from src.kai_tts.utils.logger import get_logger, setup_logging
 from src.kai_tts.io.sender import Sender
 from src.kai_tts.io.receiver import Receiver
-from src.kai_tts.schemata.ipc import DataReceive, DataSend
+from src.kai_tts.engine import TTSEngine
+from src.kai_tts.processor import StreamProcessor
 
 setup_logging()
 logger = get_logger(__name__)
-
-def handle_incoming_data(data: DataReceive):
-    """Callback function triggered when valid data arrives."""
-    logger.info(f"Received valid token: '{data.text_token}' at TS: {data.timestamp}")
 
 def main():
     logger.critical("Launching src.kai_tts module...")
@@ -18,22 +15,23 @@ def main():
     sender = Sender()
     receiver = Receiver()
     
-    receiver.register_callback(handle_incoming_data)
+    # Initialize engine and processor
+    engine = TTSEngine()
+    processor = StreamProcessor(receiver, sender, engine)
+    
+    # Start the components
     receiver.start()
+    processor.start()
 
     try:
+        logger.info("Ready. Press Ctrl+C to exit.")
         while True:
-            # Simulate processing and pipeline sequencing
-            payload = DataSend(
-                timestamp=time.time(),
-                audio_buffer=b'\x00\x01\x02' # Simulated audio byte chunk
-            )
-            sender.send_payload(payload)
             time.sleep(1)
 
     except KeyboardInterrupt:
         logger.info("Shutdown signal received.")
     finally:
+        processor.stop()
         receiver.stop()
         sender.close()
 

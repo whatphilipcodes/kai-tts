@@ -3,12 +3,13 @@ name = "kai-tts"
 version = "0.1.0"
 description = "Text-to-speech module for K.ai system (part of Kaspar 2028)"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "~=3.14.0"
 dependencies = [
-    "numpy>=2.4.4",
-    "pydantic>=2.13.3",
-    "pydantic-settings>=2.14.2",
-    "pyzmq>=27.1.0",
-    "sounddevice>=0.5.5",
-    "voxcpm>=2.0.2 ; sys_platform == 'linux'",
+  "kai-shared",
+  "numpy>=2.4.4",
+  "sounddevice>=0.5.5",
+  "voxcpm>=2.0.2 ; sys_platform == 'linux'",
 ]
+
+[tool.uv.sources]
+kai-shared = { path = "./kai-shared", editable = true }

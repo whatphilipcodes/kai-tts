@@ -1,4 +1,4 @@
-from kai_shared.config_shared import settings_shared
+from src.kai_tts.config_tts import settings_tts
 from kai_shared.utils.logger import get_logger, setup_logging
 from kai_shared.io.node import PipelineNode
 
@@ -7,7 +7,7 @@ logger = get_logger(__name__)
 
 
 def main() -> None:
-    app_node = PipelineNode(config=settings_shared)
+    app_node = PipelineNode(config=settings_tts.shared)
     app_node.run()
 
 

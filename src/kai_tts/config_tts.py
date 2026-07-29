@@ -9,7 +9,7 @@ from kai_shared.config_shared import SharedConfig
 # from pydantic import BaseModel
 
 
-class GlobalConfig(BaseSettings):
+class TTSConfig(BaseSettings):
     model_config = SettingsConfigDict(toml_file="config.toml")
     shared: SharedConfig = SharedConfig()
 
@@ -25,4 +25,4 @@ class GlobalConfig(BaseSettings):
         return (TomlConfigSettingsSource(settings_cls),)
 
 
-settings = GlobalConfig()
+settings_tts = TTSConfig()

@@ -6,8 +6,6 @@ readme = "README.md"
 requires-python = "~=3.14.0"
 dependencies = [
   "kai-shared",
-  "numpy>=2.4.4",
-  "sounddevice>=0.5.5",
   "voxcpm>=2.0.2 ; sys_platform == 'linux'",
 ]
 

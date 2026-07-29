@@ -1,30 +1,28 @@
-from pydantic import BaseModel, ConfigDict
-from pydantic_settings import BaseSettings
-
-from src.kai_tts.utils.custom_types import LogLevel, NetworkProtocol
-
-
-class SystemConfig(BaseModel):
-    log_level: LogLevel = LogLevel.INFO
-
-
-class NetworkConfig(BaseModel):
-    protocol: NetworkProtocol = NetworkProtocol.TCP
-    port_in: int = 5555
-    port_out: int = 5556
-
-
-class TTSConfig(BaseModel):
-    model_name: str = "openbmb/VoxCPM2"
-    reference_wav_path: str = "resources/source-ilja.wav"
-    reference_text: str = "Das Scheinwerferlicht bricht sich in der Stille des großen Hauses, während der Vorhang langsam beiseite gleitet. In diesem flüchtigen Moment zwischen Realität und Illusion verschmelzen die Worte des Dramas mit der Präsenz des Schauspielers, um das Publikum in eine Welt voll dramatischer Tiefe und ungeahnter Leidenschaft zu entführen."
+from typing import Tuple, Type
+from pydantic_settings import (
+    BaseSettings,
+    PydanticBaseSettingsSource,
+    SettingsConfigDict,
+    TomlConfigSettingsSource,
+)
+from kai_shared.config_shared import SharedConfig
+# from pydantic import BaseModel
 
 
 class GlobalConfig(BaseSettings):
-    model_config = ConfigDict(frozen=True)
-    system: SystemConfig = SystemConfig()
-    network: NetworkConfig = NetworkConfig()
-    tts: TTSConfig = TTSConfig()
+    model_config = SettingsConfigDict(toml_file="config.toml")
+    shared: SharedConfig = SharedConfig()
+
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: Type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> Tuple[PydanticBaseSettingsSource, ...]:
+        return (TomlConfigSettingsSource(settings_cls),)
 
 
 settings = GlobalConfig()

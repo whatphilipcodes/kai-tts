@@ -1,9 +1,10 @@
-import socket
-import numpy as np
-import sounddevice as sd
 import queue
+import socket
 import threading
 import time
+
+import numpy as np
+import sounddevice as sd
 
 HOST = "127.0.0.1"
 PORT = 5005

@@ -1,6 +1,7 @@
 import socket
-from voxcpm import VoxCPM
 from pathlib import Path
+
+from voxcpm import VoxCPM
 
 HOST = "127.0.0.1"
 PORT = 5005

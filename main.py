@@ -1,16 +1,15 @@
-from src.kai_tts.config_tts import settings_tts
-from kai_shared.utils.logger import get_logger, setup_logging
+import uvloop
 from kai_shared.io.node import PipelineNode
-import asyncio
+from kai_shared.utils.logger import setup_logging
 
-setup_logging()
-logger = get_logger(__name__)
+from src.kai_tts.config_tts import settings_tts
 
 
 async def main() -> None:
-    app_node = PipelineNode(config=settings_tts.shared)
-    await app_node.run()
+    setup_logging()
+    node = PipelineNode(settings_tts.shared)
+    await node.run()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    uvloop.run(main())
